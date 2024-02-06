@@ -65,7 +65,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
         _latitude = position.latitude;
         _longitude = position.longitude;
       });
-      print("Lat and long calculated");
+      print("Lat and long calculated Successfully");
     } catch (e) {
       print("Error fetching location: $e");
       // Handle location fetch error
@@ -83,7 +83,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
         child: Form(
           key: _formKey,
           child: ListView(
-            children: [
+            children: [    //Implementing validation 
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(labelText: 'Name'),
@@ -114,6 +114,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
                   return null;
                 },
               ),
+              //Address,City,State are not POST/PATCH yet saved .
               TextFormField(
                 controller: _addressController,
                 decoration: InputDecoration(labelText: 'Address'),
@@ -126,6 +127,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
                 controller: _stateController,
                 decoration: InputDecoration(labelText: 'State'),
               ),
+              //Using Radiobutton for Gender and Status
               ListTile(
                 title: Text('Gender'),
                 trailing: Row(
@@ -182,6 +184,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
                   ],
                 ),
               ),
+              //Adding new user 
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -197,6 +200,10 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
                       'latitude': _latitude.toString(),
                       'longitude': _longitude.toString(),
                     };
+                /*   If addUser succeeds, navigate back to the previous screen with a success indicator
+                the boolean value is passed to the userscreen if it is true the fetchuser() is called which refresh the 
+                data  without reloading .
+                */ 
 
                     try {
                       await addUser(userData);
