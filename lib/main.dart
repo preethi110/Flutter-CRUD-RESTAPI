@@ -27,6 +27,7 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
+  //implemented pagination
   int page = 1;
   int perPage = 10;
   List<Map<String, dynamic>> userList = [];
