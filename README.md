@@ -1,7 +1,9 @@
 Screen 1: User List
 
- 1.Display a list of users fetched from the API "https://gorest.co.in/" using a GET request.
+ 1.Display a list of users fetched from the API "https://gorest.co.in/" using a GET request. 
+ 
  2.Implemented pagination using the page and per_page parameters in the API.
+ 
  3.Display each user item with the user's name, email, and gender.
  4.Included an "Add" button at the top of the screen.
  5.Implemented "Edit" and "Remove" options for each user item.
