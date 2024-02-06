@@ -12,6 +12,7 @@ Screen 1: User List
  
  6.On pressing "Add," navigate to Screen 2 for adding a new user.
  
+ 
 Screen 2: Add/Edit User Form
 
  1.Created a form to add a new user or edit an existing user.
@@ -26,6 +27,7 @@ Screen 2: Add/Edit User Form
  
  6.On pressing "Add" or "Update," use the respective API endpoint.
  
+ 
 API Integration
 
  1.Implemented POST request functionality using the provided endpoint: "https://gorest.co.in/."
@@ -33,6 +35,7 @@ API Integration
  2.Implemented PATCH request functionality using the provided endpoint: "https://gorest.co.in/{id}".
  
  3.Implemented DELETE request functionality to delete a user.
+ 
  
 Additional Functionality
 
