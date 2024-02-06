@@ -23,20 +23,20 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
     super.initState();
     _nameController = TextEditingController(text: widget.userDetails['name']);
     _emailController = TextEditingController(text: widget.userDetails['email']);
-    _genderController = TextEditingController(text: widget.userDetails['gender']);
-      _selectedGender = widget.userDetails['gender'];
+    _genderController =
+        TextEditingController(text: widget.userDetails['gender']);
+    _selectedGender = widget.userDetails['gender'];
     _selectedStatus = widget.userDetails['status'];
   }
 
   Future<bool> updateUser(String userId, Map<String, dynamic> userData) async {
     try {
       final response = await http.patch(
-      Uri.parse('https://gorest.co.in/public/v2/users/${userId}'), // Replace with your API endpoint
+        Uri.parse('https://gorest.co.in/public/v2/users/${userId}'),
         headers: {
           'Content-Type': 'application/json',
-             'Authorization':
-            'Bearer 5ddf131dc3b505fc605be2cda0a55452e0c7c8c83538740fb2cdf1b3bc07a3fc', 
-          // Add any additional headers as needed
+          'Authorization':
+              'Bearer 5ddf131dc3b505fc605be2cda0a55452e0c7c8c83538740fb2cdf1b3bc07a3fc',
         },
         body: jsonEncode(userData),
       );
@@ -78,7 +78,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
               controller: _genderController,
               decoration: InputDecoration(labelText: 'Gender'),
             ),
-                        ListTile(
+            ListTile(
               title: Text('Gender'),
               subtitle: Row(
                 children: [
@@ -132,9 +132,6 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                 ],
               ),
             ),
-
-
-
             ElevatedButton(
               onPressed: () async {
                 // Prepare updated user data
@@ -143,11 +140,11 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                   'email': _emailController.text,
                   'gender': _selectedGender,
                   'status': _selectedStatus,
-                  // Add any additional fields as needed
                 };
 
                 // Call updateUser method
-                bool updateSuccess = await updateUser(widget.userDetails['id'].toString(), updatedUserData);
+                bool updateSuccess = await updateUser(
+                    widget.userDetails['id'].toString(), updatedUserData);
 
                 if (updateSuccess) {
                   // User updated successfully

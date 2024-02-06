@@ -57,6 +57,15 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
     _fetchLocation();
   }
 
+  /*
+Fetches the current device location using Geolocator plugin.
+This function retrieves the latitude and longitude of the device's current location
+with a high accuracy level and updates the state variables accordingly.
+If successful, it sets the [_latitude] and [_longitude] variables with the retrieved values
+and prints a success message to the console.
+If an error occurs during location fetching, it catches the error and prints it to the console.
+*/
+
   Future<void> _fetchLocation() async {
     try {
       Position position = await Geolocator.getCurrentPosition(
@@ -200,9 +209,8 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
                       'latitude': _latitude.toString(),
                       'longitude': _longitude.toString(),
                     };
-                /*   If addUser succeeds, navigate back to the previous screen with a success indicator
-                the boolean value is passed to the userscreen if it is true the fetchuser() is called which refresh the 
-                data  without reloading .
+                /*  If addUser succeeds, navigate back to the previous screen with a success indicator. Pass the boolean value to the UserScreen; 
+                if it is true, call fetchUser(), which refreshes the data without reloading
                 */ 
 
                     try {
@@ -227,6 +235,7 @@ class _AddEditUserScreenState extends State<AddEditUserScreen> {
   Future<void> addUser(Map<String, dynamic> userData) async {
    userData['latitude'] = _latitude.toString();
    userData['longitude'] = _longitude.toString();
+   //for reference
    print( "${userData['latitude']} ,${userData['longitude']},${userData['status']},${userData['gender']}," );
    print("${userData['address']},${userData['city']},${userData['state']}");
     final response = await http.post(

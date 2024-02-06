@@ -38,6 +38,13 @@ class _UserListScreenState extends State<UserListScreen> {
     super.initState();
     fetchUsers();
   }
+/*
+ Fetches a list of users from a remote API.
+This function sets the state variable [isLoading] to true before making the API request.
+It then performs an HTTP GET request to the specified API endpoint, including pagination parameters.
+Upon receiving a successful response (status code 200).The [userList] is updated with the fetched user data, and [isLoading] is set back to false.
+If the response status code is not 200, it throws an exception indicating the failure to load users.
+*/
 
   Future<void> fetchUsers() async {
     setState(() {
@@ -70,21 +77,21 @@ class _UserListScreenState extends State<UserListScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.add),
-  onPressed: () async {
-    // Navigate to the AddEditUserScreen
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddEditUserScreen(),
-      ),
-    );
+            onPressed: () async {
+              // Navigate to the AddEditUserScreen
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditUserScreen(),
+                ),
+              );
 
-    // Check if the result is true (indicating a user was added)
-    if (result == true) {
-      // Refresh the user list
-      fetchUsers();
-    }
-  },
+              // Check if the result is true (indicating a user was added)
+              if (result == true) {
+                // Refresh the user list
+                fetchUsers();
+              }
+            },
           ),
         ],
       ),
@@ -100,7 +107,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(userList[index]['email']),
-                      Text(userList[index]['gender']), // Add gender here
+                      Text(userList[index]['gender']),
                     ],
                   ),
                   trailing: Row(
@@ -108,21 +115,21 @@ class _UserListScreenState extends State<UserListScreen> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
-                      onPressed: () async {
-                         final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => UpdateUserScreen(userDetails: userList[index]),
-      ),
-    );
+                        onPressed: () async {
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateUserScreen(
+                                  userDetails: userList[index]),
+                            ),
+                          );
 
-    // Check if the result is true (indicating a user was added)
-    if (result == true) {
-      // Refresh the user list
-      fetchUsers();
-    }
-
-  },
+                          // Check if the result is true (indicating a user was added)
+                          if (result == true) {
+                            // Refresh the user list
+                            fetchUsers();
+                          }
+                        },
                       ),
                       IconButton(
                         icon: Icon(Icons.delete),
@@ -143,15 +150,14 @@ class _UserListScreenState extends State<UserListScreen> {
                                     child: Text('Cancel'),
                                   ),
                                   TextButton(
-                                    onPressed: () async {   
-                                      // Assuming you have access to the userId
+                                    onPressed: () async {
                                       String userId =
                                           userList[index]['id'].toString();
                                       bool deletionStatus =
                                           await deleteUser(userId);
 
                                       if (deletionStatus) {
-                                        // Refresh the user list on Screen 1
+                                        // Refresh the user list on UserScreen
                                         fetchUsers();
 
                                         print("User deleted successfully");
@@ -160,7 +166,7 @@ class _UserListScreenState extends State<UserListScreen> {
                                         // Handle deletion failure
                                         // Display an error message or retry option
                                       }
-                                           Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
                                     },
                                     child: Text('Remove'),
                                   ),
@@ -185,13 +191,22 @@ class _UserListScreenState extends State<UserListScreen> {
   }
 }
 
+/*
+Attempts to delete a user from a remote API.
+This function takes a [userId] parameter indicating the ID of the user to be deleted.
+It performs an HTTP DELETE request to the specified API endpoint, including the user ID in the URL path.
+If the deletion is successful (status code 204), it prints a success message to the console and returns true.
+If the deletion fails, it prints an error message to the console, including the status code, and returns false.
+If an error occurs during the deletion process, it catches the error, prints it to the console, and returns false.
+*/
+
 Future<bool> deleteUser(String userId) async {
   try {
     final response = await http.delete(
       Uri.parse('https://gorest.co.in/public/v2/users/${userId}'),
       headers: {
         'Authorization':
-            'Bearer 5ddf131dc3b505fc605be2cda0a55452e0c7c8c83538740fb2cdf1b3bc07a3fc', // Replace with your access token
+            'Bearer 5ddf131dc3b505fc605be2cda0a55452e0c7c8c83538740fb2cdf1b3bc07a3fc',
       },
     );
 
