@@ -5,9 +5,6 @@ import 'package:geolocator/geolocator.dart';
 
 class AddEditUserScreen extends StatefulWidget {
   final Map<String, dynamic>? userData;
-
-  
-
   AddEditUserScreen({this.userData});
 
   @override
